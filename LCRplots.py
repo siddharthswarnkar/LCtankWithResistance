@@ -14,7 +14,7 @@ def odeSeriesHelper(initial,t,R,L,C):
 def odeParallelHelper(initial,t,R,L,C):
     def odeParallelInit(initial,t):
         initial_voltage = float(initial[0])
-        initial_voltage_rate = float(initial[0])
+        initial_voltage_rate = float(initial[1])
         return [initial_voltage_rate, (-1/(L*C))*initial_voltage - (1/(R*C))*initial_voltage_rate ]
     return odeParallelInit
 
@@ -23,12 +23,12 @@ def LCRplots(func, initial, t, Title, legend):
     with umderdamped, overdamped and critically damped case'''
     
     ans = odeint(func, initial, t)
-    
+    print ans[:,0] 
     fig = plt.figure(1)
     ax = fig.add_subplot(111)
     ax.plot(t,ans[:,0],lw=1,label=legend[0])
-    ax.hold('ON')
-    ax.plot(t,ans[:,1],lw=1,label=legend[1])
+    #ax.hold('ON')
+    #ax.plot(t,ans[:,1],lw=1,label=legend[1])
     ax.set_xlabel('Time',family='sans-serif',style='italic',size=10)
     ax.set_title(Title,family='sans-serif',style='italic',size=10)
     handles, labels = ax.get_legend_handles_labels()
@@ -40,7 +40,7 @@ def LCRplots(func, initial, t, Title, legend):
 
 ########### for underdamped ####################
 def plot_for_serial_underdamped():
-    t = np.linspace(0,20,1000)
+    t = np.linspace(0,20,20)
     R=1
     L=1
     C=0.05        
@@ -82,11 +82,11 @@ def plot_for_serial_overdamped():
 ########### for underdamped ####################
 def plot_for_parallel_underdamped():
     t = np.linspace(0,20,1000)
-    R=6.25
-    C=0.001
-    L=1
+    R=1.0
+    C=1.0
+    L=10.0
     initial_voltage = 5
-    initial_current = 0
+    initial_current = 10
     initial_voltage_rate = -(initial_voltage + R*initial_current)/float(R*C)
     initial = [initial_voltage, initial_voltage_rate]
     func = odeParallelHelper(initial,t,R,L,C)
