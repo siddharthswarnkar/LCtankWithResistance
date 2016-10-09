@@ -1,0 +1,75 @@
+\documentclass[11pt]{article}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\title{LC Tank With Resistance}
+\author{Siddharth Swarnkar \\ 
+Indian Institute of Technology, Bombay}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This paper presents the study of the behaviour of voltage and current in electric circuit consisting of  Resistance(R), Capacitor(C) and Inductor(L).\\
+The behaviour is studied under different arrangement of RLC including series and parallel arrangements. The step response of the system under constant voltage source is also presented.
+\end{abstract}
+
+\section{Introduction}
+An RLC circuit is an electrical circuit consisting of a resistor (R), an inductor (L), and a capacitor (C), connected in series or in parallel.\\
+The circuit forms a harmonic oscillator for current, and resonates in a similar way as an LC circuit. Introducing the resistor increases the decay of these oscillations, which is also known as damping. 
+\section{Source-Free Series RLC circuit}
+The circuit is being excited by the energy initially stored in the capacitor and inductor.The energy is represented by the initial capacitor voltage and initial inductor current . Thus, at t=0,\\
+\begin{align}
+v(0) &= \frac{1}{C}\int_{-\infty}^{0}idt = V_o \label{1} \\
+i(0) &= I_o \label{2}
+\end{align}
+Applying KVL around the loop we get \\
+\begin{align}
+Ri+L\frac{di}{dt}+\frac{1}{C}\int_{-\infty}^{0}i(\tau)d\tau = 0 \label{3}
+\end{align}
+differentiating with respect to t, we get \\
+\begin{align}
+\frac{d^2i}{dt^2} + \frac{R}{L}\frac{di}{dt}+\frac{i}{LC}=0 \label{4}
+\end{align}
+
+We get initial condition of current(i) using \ref{2} and initial condition of $\frac{di}{dt}$ can be determined using \ref{1} and \ref{3}; that is,\\
+$$ Ri(0)+L\frac{di(0)}{dt}+V_o=0 $$ \\or\\
+\begin{align}
+\frac{di(0)}{dt} = \frac{-(RI_o+V_o)}{L}
+\end{align}
+
+These initial conditions are used to solve \ref{4} numerically using scipy odeint function.
+
+\section{Source-Free parallel RLC circuit}
+Parallel RLC circuits find many practical applications, notably in communications networks and filter designs.
+Assume initial inductor current $I_o$ and initial capacitor voltage $V_o$ 
+\begin{align}
+i(0) &= I_o = \frac{1}{L}\int_{\infty}^{0}v(t)dt \label{5}\\
+v(0) &= V_o \label{6}
+\end{align}
+Applying KVL we get,
+ \begin{align}
+ \frac{v}{R} + \frac{1}{L}\int_{-\infty}^tv(\tau)d\tau + C\frac{dv}{dt} \label{7}
+ \end{align}
+ Taking the derivative with respect to t and dividing by C results in
+ \begin{align}
+ \frac{d^2v}{dt^2} + \frac{1}{RC}\frac{dv}{dt} + \frac{1}{LC}v =0 \label{8}
+ \end{align}
+ For initial condition we need to find $v(0)$ and $\frac{dv(0)}{dt}$. The first term is known is from \ref{6}.
+ We find second term from \ref{5} and \ref{7}, as
+ \begin{align}
+ \frac{dv(0)}{dt} = \frac{-(V_o+RI_o)}{RC}
+ \end{align}
+ These initial conditions are used to solve \ref{8} numerically using scipy odeint function.
+
+\section{Step Response of Series RLC circuit}
+The step response is obtained by the sudden application of a dc source. Applying KVL around the loop for $t>0$,
+\begin{align}
+ &L\frac{di}{dt} + Ri + v = V_s \label{9} \\
+ &i = L\frac{dv}{dt}
+\end{align}
+ Substituting for i in equation \ref{9}  and rearranging terms,
+ $$ \frac{d^2v}{dt^2} + \frac{R}{L}\frac{dv}{dt} + \frac{v}{LC} =  \frac{V_s}{LC} $$
+ Initial condition for this case are $v(0) = 0$ and $\frac{dv(0)}{dt} = 0 $
+\end{document}
