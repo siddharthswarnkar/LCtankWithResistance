@@ -16,10 +16,10 @@ This paper presents the study of the behaviour of voltage and current in electri
 The behaviour is studied under different arrangement of RLC including series and parallel arrangements. The step response of the system under constant voltage source is also presented.
 \end{abstract}
 
-\section{Introduction}
+\section{Introduction \cite{Wiki} }
 An RLC circuit is an electrical circuit consisting of a resistor (R), an inductor (L), and a capacitor (C), connected in series or in parallel.\\
 The circuit forms a harmonic oscillator for current, and resonates in a similar way as an LC circuit. Introducing the resistor increases the decay of these oscillations, which is also known as damping. 
-\section{Source-Free Series RLC circuit}
+\section{Source-Free Series RLC circuit \cite{Alexander}}
 The circuit is being excited by the energy initially stored in the capacitor and inductor.The energy is represented by the initial capacitor voltage and initial inductor current . Thus, at t=0,\\
 \begin{align}
 v(0) &= \frac{1}{C}\int_{-\infty}^{0}idt = V_o \label{1} \\
@@ -43,24 +43,24 @@ $$ Ri(0)+L\frac{di(0)}{dt}+V_o=0 $$ \\or\\
 These initial conditions are used to solve \ref{4} numerically using scipy odeint function.
 
 \begin{figure}[H]
-\includegraphics[keepaspectratio=true, scale=0.7]{CurrentandRateofCurrnetAcrossInductorForUnderdamped.png}
+\includegraphics[keepaspectratio=true, scale=0.7]{../output/CurrentandRateofCurrnetAcrossInductorForUnderdamped.png}
 \caption{Response of the underdamped series RLC system }
 \centering
 \end{figure}
 
 \begin{figure}[H]
-\includegraphics[keepaspectratio=true, scale=0.7]{CurrentandRateofCurrnetAcrossInductorForCriticallyDamped.png}
+\includegraphics[keepaspectratio=true, scale=0.7]{../output/CurrentandRateofCurrnetAcrossInductorForCriticallyDamped.png}
 \caption{Response of the critically damped series RLC system }
 \centering
 \end{figure}
 
 \begin{figure}[H]
-\includegraphics[keepaspectratio=true, scale=0.7]{CurrentandRateofCurrnetAcrossInductorForOveramped.png}
+\includegraphics[keepaspectratio=true, scale=0.7]{../output/CurrentandRateofCurrnetAcrossInductorForOveramped.png}
 \caption{Response of the overdamped series RLC system }
 \centering
 \end{figure}
 
-\section{Source-Free parallel RLC circuit}
+\section{Source-Free parallel RLC circuit \cite{Alexander}}
 Parallel RLC circuits find many practical applications, notably in communications networks and filter designs.
 Assume initial inductor current $I_o$ and initial capacitor voltage $V_o$ 
 \begin{align}
@@ -83,24 +83,24 @@ Applying KVL we get,
  These initial conditions are used to solve \ref{8} numerically using scipy odeint function.
  
 \begin{figure}[H]
-\includegraphics[keepaspectratio=true, scale=0.7]{VoltageandRateofVoltageAcrossCapacitorForUnderdamped.png}
+\includegraphics[keepaspectratio=true, scale=0.7]{../output/VoltageandRateofVoltageAcrossCapacitorForUnderdamped.png}
 \caption{Response of the underdamped parallel RLC system }
 \centering
 \end{figure}
 
 \begin{figure}[H]
-\includegraphics[keepaspectratio=true, scale=0.7]{VoltageandRateofVoltageAcrossCapacitorForCriticallyDamped.png}
+\includegraphics[keepaspectratio=true, scale=0.7]{../output/VoltageandRateofVoltageAcrossCapacitorForCriticallyDamped.png}
 \caption{Response of the critically damped parallel RLC system }
 \centering
 \end{figure}
 
 \begin{figure}[H]
-\includegraphics[keepaspectratio=true, scale=0.7]{VoltageandRateofVoltageAcrossCapacitorForOveramped.png}
+\includegraphics[keepaspectratio=true, scale=0.7]{../output/VoltageandRateofVoltageAcrossCapacitorForOveramped.png}
 \caption{Response of the overdamped parallel RLC system }
 \centering
 \end{figure}
 
-\section{Step Response of Series RLC circuit}
+\section{Step Response of Series RLC circuit \cite{Alexander}}
 The step response is obtained by the sudden application of a dc source. Applying KVL around the loop for $t>0$,
 \begin{align}
  &L\frac{di}{dt} + Ri + v = V_s \label{9} \\
@@ -111,21 +111,24 @@ The step response is obtained by the sudden application of a dc source. Applying
  Initial condition for this case are $v(0) = 0$ and $\frac{dv(0)}{dt} = 0 $
 
 \begin{figure}[H]
-\includegraphics[keepaspectratio=true, scale=0.7]{StepResponseofVoltageandRateofVoltageAcrossCapacitorForUnderdamped.png}
+\includegraphics[keepaspectratio=true, scale=0.7]{../output/StepResponseofVoltageandRateofVoltageAcrossCapacitorForUnderdamped.png}
 \caption{Step Response of the underdamped series RLC system }
 \centering
 \end{figure}
 
 \begin{figure}[H]
-\includegraphics[keepaspectratio=true, scale=0.7]{StepResponseofVoltageandRateofVoltageAcrossCapacitorForCritical.png}
+\includegraphics[keepaspectratio=true, scale=0.7]{../output/StepResponseofVoltageandRateofVoltageAcrossCapacitorForCritical.png}
 \caption{Step Response of the critically damped series RLC system }
 \centering
 \end{figure}
 
 \begin{figure}[H]
-\includegraphics[keepaspectratio=true, scale=0.7]{StepResponseofVoltageandRateofVoltageAcrossCapacitorForOverdamped.png}
+\includegraphics[keepaspectratio=true, scale=0.7]{../output/StepResponseofVoltageandRateofVoltageAcrossCapacitorForOverdamped.png}
 \caption{Step Response of the overdamped series RLC system }
 \centering
 \end{figure} 
+ 
+\bibliography{bib_file}{}
+\bibliographystyle{plain} 
  
 \end{document}

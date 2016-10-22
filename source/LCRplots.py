@@ -30,7 +30,8 @@ def LCRplots(func, initial, t, Title, legend):
     '''Plots all the relivant graphs of LCtankwithResistance
     with umderdamped, overdamped and critically damped case'''    
     ans = odeint(func, initial, t) 
-    fig = plt.figure(1)
+    fig = plt.figure()
+    fig.suptitle('130010038 LC Tank With Resistance', fontsize=14, fontweight='bold')
     ax = fig.add_subplot(111)
     ax.plot(t,ans[:,0],'-bo',lw=1,label=legend[0])
     ax.hold('ON')
@@ -39,9 +40,8 @@ def LCRplots(func, initial, t, Title, legend):
     ax.set_title(Title,family='sans-serif',style='italic',size=10)
     handles, labels = ax.get_legend_handles_labels()
     ax.legend(handles=handles,fontsize=10)
-    name = "".join(Title.split(" "))+'.png'
+    name = '../output/'+"".join(Title.split(" "))+'.png'
     plt.savefig(name)
-    plt.show()
     
 
 #####################################        Source Free Series RLC        ########################################
@@ -166,15 +166,18 @@ def plot_for_step_overdamped():
 
 def main():
     
-    plot_for_serial_underdamped()
-    plot_for_serial_critical()
-    plot_for_serial_overdamped()
-    plot_for_parallel_underdamped()
-    plot_for_parallel_critical()
-    plot_for_parallel_overdamped()
-    plot_for_step_underdamped()
-    plot_for_step_critical()
-    plot_for_step_overdamped()
+	if not os.path.exists('../output/'):
+		os.mkdir('../output/')
+    
+	plot_for_serial_underdamped()
+	plot_for_serial_critical()
+	plot_for_serial_overdamped()
+	plot_for_parallel_underdamped()
+	plot_for_parallel_critical()
+	plot_for_parallel_overdamped()
+	plot_for_step_underdamped()
+	plot_for_step_critical()
+	plot_for_step_overdamped()
 
 if __name__ == '__main__':
     main()
