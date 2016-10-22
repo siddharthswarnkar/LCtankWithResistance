@@ -1,1 +1,21 @@
-cd ./output ;FILES := paper.pdf ;AUXFILES := $(FILES:.pdf=.aux) ;LOGFILES := $(FILES:.pdf=.log) ;BBLFILES := $(FILES:.pdf=.bbl) ;BLGFILES := $(FILES:.pdf=.blg) ;OTHERS := $(wildcard *.synctex.gz); PICS := $(wildcard *.png) ;PYC := $(wildcard *.pyc) ;main :; python LCRplots.py;make pdf ;pdf : $(FILES:.pdf=.tex) ;make paper.pdf ;%.pdf: %.tex ;pdflatex $< ;bibtex `echo $< |cut -d "." -f1`.aux; pdflatex $< ;pdflatex $< ; .PHONY: clean clean-all ;clean-all: ;$(RM) $(AUXFILES) $(FILES) $(LOGFILES) $(BBLFILES) $(BLGFILES) $(OTHERS) $(PICS) $(PYC); clean:; $(RM) $(AUXFILES) $(LOGFILES) $(BBLFILES) $(BLGFILES) $(OTHERS) $(PICS) $(PYC) 
+FILES := 130010038.pdf 
+PICS := $(wildcard *.png)
+PYC := $(wildcard *.pyc)
+
+main :   
+	cd source && python 130010038.py
+	make paper
+
+paper: 
+	cp source/bib_file.bib . 
+	pdflatex -output-directory output source/130010038.tex 
+	bibtex output/130010038.aux
+	pdflatex -output-directory output source/130010038.tex
+	pdflatex -output-directory output source/130010038.tex
+	rm bib_file.bib
+
+.PHONY: clean clean-all
+tests:
+	pytest source/130010038.py
+clean:	 
+	rm -rf output
